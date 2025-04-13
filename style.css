@@ -418,6 +418,16 @@ section {
     display: block;
 }
 
+/* Additional Performance Optimization */
+.portfolio-item img, .about-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
 .portfolio-info {
     position: absolute;
     bottom: 0;
@@ -607,6 +617,35 @@ section {
     box-shadow: 0 0 10px #7cf03d;
 }
 
+/* Form status styling */
+.form-status {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.form-status:not(:empty) {
+    height: auto;
+    padding: 10px;
+    opacity: 1;
+    margin-bottom: 15px;
+}
+
+/* Improved accessibility */
+.btn:focus, 
+.portfolio-btn:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid #7cf03d;
+    outline-offset: 2px;
+}
+
 /* FOOTER */
 .footer {
     padding: 30px;
@@ -673,6 +712,15 @@ section {
     .menu-btn.active .bar:nth-child(3) {
         transform: rotate(45deg) translate(-5px, -6px);
         background-color: #7cf03d;
+    }
+}
+
+/* Optimize animations for better performance */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
     }
 }
 
