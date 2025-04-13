@@ -313,7 +313,7 @@ section {
 }
 
 /* About section rotating border (different implementation from home) */
-.about-img::before,
+/*.about-img::before,
 .about-img::after {
     content: '';
     position: absolute;
@@ -326,7 +326,7 @@ section {
     border-radius: 50%;
     animation: about-rotate-border 10s linear infinite;
     z-index: -1;
-}
+}*/
 
 .about-img::after {
     animation-delay: -5s;
