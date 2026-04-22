@@ -1,357 +1,669 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Kiran Bandi — Full Stack Developer & ML Enthusiast based in Bangalore." />
+    <title>Kiran Bandi — Portfolio</title>
+    <link rel="icon" href="KB_fav.png" type="image/png" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "gh-bg": "#ffffff", "gh-text": "#24292f", "gh-border": "#d0d7de",
+              "gh-panel": "#f6f8fa", "gh-hover": "#eef2f6", "gh-accent": "#0969da",
+              "gh-dark-bg": "#0d1117", "gh-dark-text": "#c9d1d9",
+              "gh-dark-border": "#30363d", "gh-dark-panel": "#161b22", "gh-dark-hover": "#1f242c",
+            },
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["Geist Mono", "ui-monospace", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kiran Bandi - Full Stack Developer and ML Enthusiast. Portfolio showcasing web development, mobile app development, and machine learning projects.">
-    <title>Kiran Bandi - Portfolio</title>
-    <link rel="icon" href="KB_fav.png" type="image/png">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="style.css">
-</head>
+  <body class="min-h-screen bg-gh-bg text-gh-text dark:bg-gh-dark-bg dark:text-gh-dark-text transition-colors">
+    <canvas id="heroParticles" aria-hidden="true"></canvas>
 
-<body>
-    
-    <nav class="navbar">
-        <a href="#" class="logo" >Portfolio.</a>
-        <div class="menu-btn">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+    <!-- HEADER -->
+    <header id="site-header" class="sticky top-0 z-40 bg-gh-bg dark:bg-gh-dark-bg border-b border-gh-border dark:border-gh-dark-border">
+      <div class="mx-auto max-w-6xl px-4 py-3 flex flex-wrap items-center gap-3">
+        <a href="#hero" class="brand">
+          <div class="brand-avatar">KB</div>
+          <span class="font-semibold tracking-tight">Kiran Bandi</span>
+        </a>
+
+        <nav class="flex flex-wrap items-center gap-1 text-xs ml-auto" id="mainNav">
+          <a href="#hero"       class="nav-link active" data-section="hero">Home</a>
+          <a href="#experience" class="nav-link" data-section="experience">Experience</a>
+          <a href="#skills"     class="nav-link" data-section="skills">Skills</a>
+          <a href="#projects"   class="nav-link" data-section="projects">Projects</a>
+          <a href="#contact"    class="nav-link" data-section="contact">Contact</a>
+        </nav>
+
+        <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
+          <span class="sun">☀️</span><span class="moon">🌙</span>
+        </button>
+      </div>
+
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="relative flex items-center gap-6 border-b border-gh-border dark:border-gh-dark-border">
+          <button class="tab-btn active" data-tab="Overview">Overview</button>
+          <button class="tab-btn" data-tab="Repositories">Repositories</button>
+          <button class="tab-btn" data-tab="Projects">Projects</button>
+          <span id="tabUnderline" class="tab-underline"></span>
         </div>
-        <ul class="nav-menu">
-            <li class="active">
-                <a href="#home">Home</a>
-            </li>
-            <li>
-                <a href="#about">About</a>
-            </li>
-            <li>
-                <a href="#portfolio">Portfolio</a>
-            </li>
-            <li>
-                <a href="#services">Services</a>
-            </li>
-            <li>
-                <a href="#contact">Contact</a>
-            </li>
-        </ul>
-    </nav>
-    
-    <div class="bars-animation">
-        <div class="bar" style ="--i:6;"></div>
-        <div class="bar" style ="--i:5;"></div>
-        <div class="bar" style ="--i:4;"></div>
-        <div class="bar" style ="--i:3;"></div>
-        <div class="bar" style ="--i:2;"></div>
-        <div class="bar" style ="--i:1;"></div>
-    </div>
-    
-    <section class="home" id="home">
-        
-        <div class="home-info">
-            <h1>Kiran Bandi</h1>
-            <h2>I'm 
-                <span style="--i:4" data-text="Full Stack Developer" >Full Stack Developer</span>
-                <span style="--i:3" data-text="ML Enthusiast">ML Enthusiast</span>
-                <span style="--i:2" data-text="Frontend Engineer">Frontend Engineer</span>
-                <span style="--i:1" data-text="Backend Developer">Backend Developer</span>
-            </h2>
-            <p>Hi, I'm Kiran — a full-stack developer with a primary focus on backend development using Ruby on Rails. I enjoy building web applications that are both functional and user-friendly. I've also had a good experience working with Python and machine learning, having done several projects during my time in college. Working in a startup environment has helped me become adaptable, detail-oriented, and collaborative. Lately, I've been exploring backend development with Go and enjoy learning through hands-on projects and new tech. I'm always eager to learn and grow, and I'm excited about the opportunity to work with a talented team. I'm looking for a role where I can contribute my skills and continue to develop as a developer.</p>
-            <div class="btn-sci">
-                <a href="https://drive.google.com/file/d/1fXaaT3hPlOYd2go5m5gmJCX4J_3HPyEk/view?usp=sharing" class="btn" target="_blank">Download CV</a>
-                <div class="sci">
-                    <a href="https://github.com/Kiranbandi02"><i class='bx bxl-github'></i></a>
-                    <a href="https://www.linkedin.com/in/kiranbandi07/"><i class='bx bxl-linkedin'></i></a>
-                    <a href="https://x.com/Kiran_bandi7"><i class='bx bxl-twitter'></i></a>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-10 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
+
+      <!-- SIDEBAR -->
+      <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pr-1">
+
+        <div class="profile-card reveal tilt-el">
+          <div class="avatar-ring">
+            <img src="home.png" alt="Kiran Bandi" class="avatar-img" />
+            <div class="avatar-status" title="Open to work"></div>
+          </div>
+          <div class="mt-3">
+            <div class="text-xl font-bold">Kiran Bandi</div>
+            <div class="text-sm opacity-60 font-mono">@Kiranbandi02</div>
+          </div>
+          <p class="mt-2 text-sm opacity-70 leading-relaxed">
+            Full Stack Developer · Ruby on Rails · ML Enthusiast building impactful products.
+          </p>
+
+          <div class="mt-3 space-y-1">
+            <div class="flex items-center gap-2 text-xs opacity-60">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+              <a href="https://github.com/Kiranbandi02" target="_blank" rel="noreferrer" class="hover:opacity-100 transition-opacity">github.com/Kiranbandi02</a>
+            </div>
+            <div class="flex items-center gap-2 text-xs opacity-60">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"/></svg>
+              <a href="mailto:bandikiranbabu315@gmail.com" class="hover:opacity-100 transition-opacity">bandikiranbabu315@gmail.com</a>
+            </div>
+            <div class="flex items-center gap-2 text-xs opacity-60">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm4.879-2.773 4.264 2.559a.25.25 0 0 1 0 .428l-4.264 2.559A.25.25 0 0 1 6 10.559V5.442a.25.25 0 0 1 .379-.215Z"/></svg>
+              <span>Bangalore, India</span>
+            </div>
+          </div>
+
+          <div class="mt-4 grid grid-cols-2 gap-2">
+            <a href="https://drive.google.com/file/d/1fXaaT3hPlOYd2go5m5gmJCX4J_3HPyEk/view?usp=sharing" target="_blank" rel="noreferrer" class="btn-primary text-center text-sm">Download CV</a>
+            <a href="mailto:bandikiranbabu315@gmail.com" class="btn-secondary text-center text-sm">Email Me</a>
+          </div>
+
+          <div class="mt-4 flex items-center gap-4">
+            <a href="https://github.com/Kiranbandi02" target="_blank" rel="noreferrer" class="social-link">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/kiranbandi07/" target="_blank" rel="noreferrer" class="social-link">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://x.com/Kiran_bandi7" target="_blank" rel="noreferrer" class="social-link">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              X
+            </a>
+          </div>
+        </div>
+
+        <!-- Contribution Graph -->
+        <div class="panel reveal">
+          <div class="text-sm font-semibold mb-3 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span>
+            Contribution Activity
+          </div>
+          <svg id="contribSvg" width="100%" height="100" viewBox="0 0 240 85" class="overflow-visible"></svg>
+          <div class="flex items-center justify-between mt-2 text-xs opacity-40">
+            <span>24 weeks ago</span><span>Today</span>
+          </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="panel reveal">
+          <div class="text-sm font-semibold mb-3">Quick Stats</div>
+          <div class="space-y-2">
+            <div class="flex justify-between text-sm"><span class="opacity-60">Repositories</span><span class="font-mono font-semibold text-gh-accent">8+</span></div>
+            <div class="flex justify-between text-sm"><span class="opacity-60">Years coding</span><span class="font-mono font-semibold text-gh-accent">4+</span></div>
+            <div class="flex justify-between text-sm"><span class="opacity-60">Tech stacks</span><span class="font-mono font-semibold text-gh-accent">10+</span></div>
+            <div class="flex justify-between text-sm">
+              <span class="opacity-60">Status</span>
+              <span class="font-semibold text-green-500 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse inline-block"></span>Open to work
+              </span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <section class="space-y-10 min-w-0">
+
+        <!-- HERO -->
+        <section id="hero" class="hero-block reveal tilt-el">
+          <div class="hero-glow"       aria-hidden="true"></div>
+          <div class="hero-grid-lines" aria-hidden="true"></div>
+          <div class="relative z-10">
+            <div class="text-xs font-mono opacity-50 mb-2 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse inline-block"></span>
+              Available for opportunities
+            </div>
+            <h1 class="hero-name"><span class="text-gradient">Kiran Bandi</span></h1>
+            <div class="mt-2 text-lg font-mono opacity-80 flex items-center gap-2 min-h-[1.75rem]">
+              <span class="text-gh-accent">&gt;</span>
+              <span id="typewriter"></span><span class="cursor-blink">_</span>
+            </div>
+            <p class="mt-5 text-sm opacity-70 leading-relaxed max-w-2xl">
+              Full-stack developer with a passion for Ruby on Rails, React, and machine learning.
+              Startup-hardened, detail-oriented, and always learning — currently exploring Go for backend systems.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href="https://drive.google.com/file/d/1fXaaT3hPlOYd2go5m5gmJCX4J_3HPyEk/view?usp=sharing" target="_blank" rel="noreferrer" class="btn-primary">Download CV</a>
+              <a href="#projects" class="btn-secondary">View Projects</a>
+              <a href="#contact"  class="btn-ghost">Get in touch</a>
+            </div>
+            <div class="mt-8 grid grid-cols-3 gap-4 border-t border-gh-border dark:border-gh-dark-border pt-6" id="statsRow">
+              <div class="stat-item"><div class="stat-number" data-target="4">0</div><div class="stat-label">Years coding</div></div>
+              <div class="stat-item"><div class="stat-number" data-target="8">0</div><div class="stat-label">Projects built</div></div>
+              <div class="stat-item"><div class="stat-number" data-target="5">0</div><div class="stat-label">Core stacks</div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section id="experience" class="panel reveal">
+          <div class="section-header mb-5">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" class="text-gh-accent"><path d="M1.75 2A1.75 1.75 0 0 0 0 3.75v.736a.75.75 0 0 0 .75.75h14.5a.75.75 0 0 0 .75-.75V3.75A1.75 1.75 0 0 0 13.25 2ZM0 7.75C0 6.784.784 6 1.75 6h12.5c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25ZM1.75 7.5a.25.25 0 0 0-.25.25v5.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25Z"/></svg>
+            Experience &amp; Education
+          </div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot active"></div>
+              <div class="timeline-content reveal">
+                <div class="flex flex-wrap items-start justify-between gap-2">
+                  <div>
+                    <div class="font-semibold">Full Stack Developer</div>
+                    <div class="text-sm text-gh-accent">Startup · Bangalore</div>
+                  </div>
+                  <span class="timeline-badge">2023 – Present</span>
                 </div>
-            </div>
-        </div>
-        <div class="home-img">
-            <div class="img-box">
-                <div class="img-item">
-                    <img src="home.png" alt="Kiran Bandi Profile Image">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-content">
-            <div class="about-img">
-                <img src="home.png" alt="Profile Image">
-            </div>
-            <div class="about-text">
-                <h3>Full Stack Developer & ML Enthusiast</h3>
-                <p>Hi, I'm Kiran — a full-stack developer with a primary focus on backend development using Ruby on Rails. I enjoy building web applications that are both functional and user-friendly. I’ve also had a good experience working with Python and machine learning, having done several projects during my time in college. Working in a startup environment has helped me become adaptable, detail-oriented, and collaborative. Lately, I’ve been exploring backend development with Go and enjoy learning through hands-on projects and new tech."
+                <p class="mt-2 text-sm opacity-65 leading-relaxed">
+                  Building and maintaining web applications using Ruby on Rails and React. Full-stack work — API design, database modeling, frontend features, and deployments. Learned to move fast in a startup environment.
                 </p>
-                
-                <div class="skills">
-                    <h3>Skills</h3>
-                    <div class="skill-bars">
-                        <div class="skill">
-                            <span>Ruby on Rails</span>
-                            <div class="skill-bar">
-                                <span class="skill-fill" style="--progress: 80%"></span>
-                            </div>
-                        </div>
-                        <div class="skill">
-                            <span>Python</span>
-                            <div class="skill-bar">
-                                <span class="skill-fill" style="--progress: 90%"></span>
-                            </div>
-                        </div>
-                        <div class="skill">
-                            <span>React</span>
-                            <div class="skill-bar">
-                                <span class="skill-fill" style="--progress: 85%"></span>
-                            </div>
-                        </div>
-                        <div class="skill">
-                            <span>Javascript</span>
-                            <div class="skill-bar">
-                                <span class="skill-fill" style="--progress: 80%"></span>
-                            </div>
-                        </div>
-                        <div class="skill">
-                            <span>Machine Learning</span>
-                            <div class="skill-bar">
-                                <span class="skill-fill" style="--progress: 75%"></span>
-                            </div>
-                        </div>
-                        <div class="skill">
-                            <span>PostgreSQL</span>
-                            <div class="skill-bar">
-                                <span class="skill-fill" style="--progress: 65%"></span>
-                            </div>
-                        </div>
-                        <div class="skill">
-                            <span>Java</span>
-                            <div class="skill-bar">
-                                <span class="skill-fill" style="--progress: 50%"></span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <span class="tech-chip">Ruby on Rails</span>
+                  <span class="tech-chip">React</span>
+                  <span class="tech-chip">PostgreSQL</span>
+                  <span class="tech-chip">REST APIs</span>
                 </div>
+              </div>
             </div>
-        </div>
-    </section>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content reveal">
+                <div class="flex flex-wrap items-start justify-between gap-2">
+                  <div>
+                    <div class="font-semibold">B.Tech — Computer Science</div>
+                    <div class="text-sm text-gh-accent">University · India</div>
+                  </div>
+                  <span class="timeline-badge">2019 – 2023</span>
+                </div>
+                <p class="mt-2 text-sm opacity-65 leading-relaxed">
+                  Graduated with a focus on machine learning and software engineering. Completed ML research projects: CycleGAN-based medical imaging, audio denoising with UNet, and face recognition systems.
+                </p>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <span class="tech-chip">Python</span>
+                  <span class="tech-chip">TensorFlow</span>
+                  <span class="tech-chip">PyTorch</span>
+                  <span class="tech-chip">Java</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-    <!-- Portfolio Section -->
-    <section class="portfolio" id="portfolio">
-        <h2 class="section-title">My Portfolio</h2>
-        <div class="portfolio-container">
-            <div class="portfolio-item">
-                <img src="chauffer.png" alt="Chauffeur App Project">
-                <div class="portfolio-info">
-                    <h3>Android Development Project</h3>
-                    <p>A comprehensive ride-sharing application built using Java and Android SDK. Implemented real-time location tracking, user authentication, and payment integration.</p>
-                    <a href="https://github.com/Kiranbandi02/Chauffeur" class="portfolio-btn">View Details</a>
-                </div>
+        <!-- SKILLS -->
+        <section id="skills" class="panel reveal tilt-el">
+          <div class="section-header mb-5">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" class="text-gh-accent"><path d="M6.368 1.137a.75.75 0 0 1 .496.92l-.527 1.742a.75.75 0 0 1-1.416-.496l.527-1.742a.75.75 0 0 1 .92-.424Zm5.5 0a.75.75 0 0 1 .496.92l-.527 1.742a.75.75 0 0 1-1.416-.496l.527-1.742a.75.75 0 0 1 .92-.424ZM3.5 7.75a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5a.75.75 0 0 1-.75-.75Zm-1.5 4.5a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"/></svg>
+            Tech Stack
+          </div>
+          <div class="space-y-5">
+            <div class="skill-group">
+              <div class="skill-group-label">Languages</div>
+              <div class="flex flex-wrap gap-2">
+                <span class="skill-badge level-5">Ruby</span>
+                <span class="skill-badge level-5">Python</span>
+                <span class="skill-badge level-4">JavaScript</span>
+                <span class="skill-badge level-3">Java</span>
+                <span class="skill-badge level-2">Go <span class="learning-tag">learning</span></span>
+              </div>
             </div>
-            <div class="portfolio-item">
-                <img src="audio_denoise.png" alt="Audio Denoising Project">
-                <div class="portfolio-info">
-                    <h3>Noise Cancellation using UNet</h3>
-                    <p>Developed a deep learning system that removes unwanted noise from audio recordings using UNet architecture with spectrogram transformation for improved audio quality.</p>
-                    <a href="https://github.com/Kiranbandi02/audio-denoising-using-unet" class="portfolio-btn">View Details</a>
-                </div>
+            <div class="skill-group">
+              <div class="skill-group-label">Frontend</div>
+              <div class="flex flex-wrap gap-2">
+                <span class="skill-badge level-4">React</span>
+                <span class="skill-badge level-4">HTML / CSS</span>
+                <span class="skill-badge level-3">Tailwind CSS</span>
+                <span class="skill-badge level-3">TypeScript</span>
+              </div>
             </div>
-            <div class="portfolio-item">
-                <img src="mr_ct.png" alt="MRI to CT Conversion Project">
-                <div class="portfolio-info">
-                    <h3>Generate CT scan from MRI scan using Cycle GAN</h3>
-                    <p>Created a deep learning model that translates MRI scans to CT scans using Cycle GAN architecture, enabling non-invasive diagnostic alternatives in medical imaging.</p>
-                    <a href="https://github.com/Kiranbandi02/MRI-to-CT-translation-using-cycle-GAN" class="portfolio-btn">View Details</a>
-                </div>
+            <div class="skill-group">
+              <div class="skill-group-label">Backend</div>
+              <div class="flex flex-wrap gap-2">
+                <span class="skill-badge level-5">Ruby on Rails</span>
+                <span class="skill-badge level-4">PostgreSQL</span>
+                <span class="skill-badge level-3">REST APIs</span>
+                <span class="skill-badge level-3">Node.js</span>
+              </div>
             </div>
-            <div class="portfolio-item">
-                <img src="fr_lda.png" alt="Face Recognition Project">
-                <div class="portfolio-info">
-                    <h3>Face Recognition: LDA vs CDLDA Comparison</h3>
-                    <p>Conducted research comparing Linear Discriminant Analysis and Class-Dependent LDA for face recognition, achieving 15% improved accuracy with the CDLDA approach.</p>
-                    <a href="https://github.com/Kiranbandi02/face-recognition-using-LDA-CDLDA" class="portfolio-btn">View Details</a>
-                </div>
+            <div class="skill-group">
+              <div class="skill-group-label">ML / AI</div>
+              <div class="flex flex-wrap gap-2">
+                <span class="skill-badge level-4">TensorFlow</span>
+                <span class="skill-badge level-4">PyTorch</span>
+                <span class="skill-badge level-4">OpenCV</span>
+                <span class="skill-badge level-3">Scikit-learn</span>
+                <span class="skill-badge level-3">Pandas</span>
+              </div>
             </div>
-        </div>
-    </section>
+            <div class="skill-group">
+              <div class="skill-group-label">Tools &amp; Infra</div>
+              <div class="flex flex-wrap gap-2">
+                <span class="skill-badge level-4">Git</span>
+                <span class="skill-badge level-3">Docker</span>
+                <span class="skill-badge level-3">Linux</span>
+                <span class="skill-badge level-3">Netlify</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <h2 class="section-title">My Services</h2>
-        <div class="services-container">
-            <div class="service-box">
-                <i class='bx bx-code-alt'></i>
-                <h3>Web Development</h3>
-                <p>Building responsive and modern websites using the latest technologies and frameworks.</p>
-            </div>
-            <div class="service-box">
-                <i class='bx bx-mobile-alt'></i>
-                <h3>Mobile Development</h3>
-                <p>Creating cross-platform mobile applications using React Native and Flutter.</p>
-            </div>
-            <div class="service-box">
-                <i class='bx bx-brain'></i>
-                <h3>ML Solutions</h3>
-                <p>Implementing machine learning models for data analysis and prediction tasks.</p>
-            </div>
-            <div class="service-box">
-                <i class='bx bx-server'></i>
-                <h3>Backend Development</h3>
-                <p>Developing robust and scalable server-side applications and APIs.</p>
-            </div>
-        </div>
-    </section>
+        <!-- PROJECTS -->
+        <section id="projects" class="reveal">
+          <div class="section-header mb-4">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" class="text-gh-accent"><path d="m8 .25.345.666 2.658 5.127 5.658.824-4.065 3.966.959 5.584L8 13.75l-5.555 2.917.96-5.584-4.066-3.966 5.659-.824L8 .25Z"/></svg>
+            Pinned Projects
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <h2 class="section-title">Contact Me</h2>
-        <div class="contact-container">
-            <div class="contact-info">
-                <div class="contact-card">
-                    <i class='bx bx-envelope'></i>
-                    <h3>Email</h3>
-                    <p>bandikiranbabu315@gmail.com</p>
+            <a href="https://github.com/Kiranbandi02/Chauffeur" target="_blank" rel="noreferrer" class="project-card reveal tilt-el" data-delay="0">
+              <div class="project-media">
+                <img src="chauffer.png" alt="Chauffeur project" loading="lazy" />
+                <div class="project-overlay"><span class="view-label">View on GitHub →</span></div>
+              </div>
+              <div class="project-body">
+                <div class="flex items-center justify-between">
+                  <div class="project-title">Chauffeur</div>
+                  <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" class="opacity-40"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg>
                 </div>
-                <div class="contact-card">
-                    <i class='bx bx-phone'></i>
-                    <h3>Phone</h3>
-                    <p>+91 9014776576</p>
+                <p class="text-sm opacity-65">Ride-sharing Android app with real-time location tracking, authentication, and payments.</p>
+                <div class="flex flex-wrap gap-1 mt-2">
+                  <span class="tech-chip-sm">Java</span>
+                  <span class="tech-chip-sm">Android SDK</span>
+                  <span class="tech-chip-sm">Firebase</span>
                 </div>
-                <div class="contact-card">
-                    <i class='bx bx-map'></i>
-                    <h3>Location</h3>
-                    <p>Bangalore, India</p>
-                </div>
-                <div class="contact-social">
-                    <h3>Social Profiles</h3>
-                    <div class="social-links">
-                        <a href="https://github.com/Kiranbandi02"><i class='bx bxl-github'></i></a>
-                        <a href="https://www.linkedin.com/in/kiranbandi07/"><i class='bx bxl-linkedin'></i></a>
-                        <a href="https://x.com/Kiran_bandi7"><i class='bx bxl-twitter'></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="contact-form">
-                <form id="contactForm" action="https://formspree.io/f/mdkebyqo" method="POST">
-                    <div class="form-group">
-                        <input type="text" name="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="subject" placeholder="Subject" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" placeholder="Your Message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Send Message</button>
-                    <div id="form-status" class="form-status"></div>
-                </form>
-            </div>
-        </div>
-    </section>
+              </div>
+            </a>
 
-    <!-- Footer Section -->
-    <footer class="footer">
-        <p>&copy; 2025 Kiran Bandi. All Rights Reserved.</p>
+            <a href="https://github.com/Kiranbandi02/audio-denoising-using-unet" target="_blank" rel="noreferrer" class="project-card reveal tilt-el" data-delay="80">
+              <div class="project-media">
+                <img src="audio_denoise.png" alt="Audio denoising" loading="lazy" />
+                <div class="project-overlay"><span class="view-label">View on GitHub →</span></div>
+              </div>
+              <div class="project-body">
+                <div class="flex items-center justify-between">
+                  <div class="project-title">Noise Cancellation — UNet</div>
+                  <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" class="opacity-40"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg>
+                </div>
+                <p class="text-sm opacity-65">Deep learning system removing noise from audio using UNet architecture and spectrogram transforms.</p>
+                <div class="flex flex-wrap gap-1 mt-2">
+                  <span class="tech-chip-sm">Python</span>
+                  <span class="tech-chip-sm">PyTorch</span>
+                  <span class="tech-chip-sm">Deep Learning</span>
+                </div>
+              </div>
+            </a>
+
+            <a href="https://github.com/Kiranbandi02/MRI-to-CT-translation-using-cycle-GAN" target="_blank" rel="noreferrer" class="project-card reveal tilt-el" data-delay="160">
+              <div class="project-media">
+                <img src="mr_ct.png" alt="MRI to CT" loading="lazy" />
+                <div class="project-overlay"><span class="view-label">View on GitHub →</span></div>
+              </div>
+              <div class="project-body">
+                <div class="flex items-center justify-between">
+                  <div class="project-title">MRI → CT — CycleGAN</div>
+                  <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" class="opacity-40"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg>
+                </div>
+                <p class="text-sm opacity-65">Translates MRI scans to CT scans using CycleGAN — enabling non-invasive diagnostic alternatives.</p>
+                <div class="flex flex-wrap gap-1 mt-2">
+                  <span class="tech-chip-sm">Python</span>
+                  <span class="tech-chip-sm">GANs</span>
+                  <span class="tech-chip-sm">Medical Imaging</span>
+                </div>
+              </div>
+            </a>
+
+            <a href="https://github.com/Kiranbandi02/face-recognition-using-LDA-CDLDA" target="_blank" rel="noreferrer" class="project-card reveal tilt-el" data-delay="240">
+              <div class="project-media">
+                <img src="fr_lda.png" alt="Face recognition" loading="lazy" />
+                <div class="project-overlay"><span class="view-label">View on GitHub →</span></div>
+              </div>
+              <div class="project-body">
+                <div class="flex items-center justify-between">
+                  <div class="project-title">Face Recognition — LDA vs CDLDA</div>
+                  <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" class="opacity-40"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg>
+                </div>
+                <p class="text-sm opacity-65">Research comparing LDA and CDLDA for face recognition, achieving higher accuracy with CDLDA.</p>
+                <div class="flex flex-wrap gap-1 mt-2">
+                  <span class="tech-chip-sm">Python</span>
+                  <span class="tech-chip-sm">Computer Vision</span>
+                  <span class="tech-chip-sm">OpenCV</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- REPOSITORIES -->
+        <section id="repos" class="panel reveal">
+          <div class="section-header mb-4">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" class="text-gh-accent"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"/></svg>
+            Repositories
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <a href="https://github.com/Kiranbandi02/Chauffeur" target="_blank" rel="noreferrer" class="repo-card reveal tilt-el" data-delay="0">
+              <div class="flex items-center gap-2 mb-2">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" class="opacity-50 flex-shrink-0"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"/></svg>
+                <span class="repo-title text-gh-accent">Chauffeur</span>
+              </div>
+              <p class="text-xs opacity-55">Android ride-sharing app with real-time location and payments.</p>
+              <div class="flex items-center gap-1 mt-3 text-xs opacity-50"><span class="w-2 h-2 rounded-full bg-orange-400 inline-block"></span>Java</div>
+            </a>
+            <a href="https://github.com/Kiranbandi02/audio-denoising-using-unet" target="_blank" rel="noreferrer" class="repo-card reveal tilt-el" data-delay="80">
+              <div class="flex items-center gap-2 mb-2">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" class="opacity-50 flex-shrink-0"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"/></svg>
+                <span class="repo-title text-gh-accent">audio-denoising-unet</span>
+              </div>
+              <p class="text-xs opacity-55">UNet-based deep learning model for audio noise suppression.</p>
+              <div class="flex items-center gap-1 mt-3 text-xs opacity-50"><span class="w-2 h-2 rounded-full bg-blue-400 inline-block"></span>Python</div>
+            </a>
+            <a href="https://github.com/Kiranbandi02/MRI-to-CT-translation-using-cycle-GAN" target="_blank" rel="noreferrer" class="repo-card reveal tilt-el" data-delay="160">
+              <div class="flex items-center gap-2 mb-2">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" class="opacity-50 flex-shrink-0"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"/></svg>
+                <span class="repo-title text-gh-accent">MRI-to-CT-CycleGAN</span>
+              </div>
+              <p class="text-xs opacity-55">CycleGAN pipeline to translate MRI scans to CT scans.</p>
+              <div class="flex items-center gap-1 mt-3 text-xs opacity-50"><span class="w-2 h-2 rounded-full bg-blue-400 inline-block"></span>Python</div>
+            </a>
+            <a href="https://github.com/Kiranbandi02/face-recognition-using-LDA-CDLDA" target="_blank" rel="noreferrer" class="repo-card reveal tilt-el" data-delay="240">
+              <div class="flex items-center gap-2 mb-2">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" class="opacity-50 flex-shrink-0"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z"/></svg>
+                <span class="repo-title text-gh-accent">face-recognition-LDA-CDLDA</span>
+              </div>
+              <p class="text-xs opacity-55">Comparison of LDA and CDLDA for face recognition accuracy.</p>
+              <div class="flex items-center gap-1 mt-3 text-xs opacity-50"><span class="w-2 h-2 rounded-full bg-blue-400 inline-block"></span>Python</div>
+            </a>
+          </div>
+          <div class="mt-5 text-center">
+            <a href="https://github.com/Kiranbandi02" target="_blank" rel="noreferrer" class="btn-ghost text-sm">View all on GitHub →</a>
+          </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" class="panel reveal tilt-el">
+          <div class="section-header mb-4">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" class="text-gh-accent"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.249 1.249 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004Z"/></svg>
+            What I Build
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="service-card"><div class="service-icon">🌐</div><div class="service-title">Web Applications</div><p class="text-sm opacity-65 mt-1">Full-stack apps with Rails backends, React frontends, and production-ready APIs.</p></div>
+            <div class="service-card"><div class="service-icon">📱</div><div class="service-title">Mobile Apps</div><p class="text-sm opacity-65 mt-1">Android-native applications and cross-platform mobile experiences.</p></div>
+            <div class="service-card"><div class="service-icon">🤖</div><div class="service-title">ML Solutions</div><p class="text-sm opacity-65 mt-1">Deep learning models for image, audio, and predictive analytics tasks.</p></div>
+            <div class="service-card"><div class="service-icon">⚡</div><div class="service-title">Backend Systems</div><p class="text-sm opacity-65 mt-1">Scalable APIs, database modeling, and backend architecture in Rails and Go.</p></div>
+          </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="panel reveal">
+          <div class="section-header mb-2">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" class="text-gh-accent"><path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"/></svg>
+            Get In Touch
+          </div>
+          <p class="text-sm opacity-60 mb-5">Reach out via email or drop a message below.</p>
+
+          <div class="flex flex-wrap gap-4 mb-6">
+            <a href="mailto:bandikiranbabu315@gmail.com" class="flex items-center gap-2 text-sm text-gh-accent hover:opacity-80 transition-opacity">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"/></svg>
+              bandikiranbabu315@gmail.com
+            </a>
+            <span class="flex items-center gap-2 text-sm opacity-60">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm4.879-2.773 4.264 2.559a.25.25 0 0 1 0 .428l-4.264 2.559A.25.25 0 0 1 6 10.559V5.442a.25.25 0 0 1 .379-.215Z"/></svg>
+              Bangalore, India
+            </span>
+          </div>
+
+          <form id="contactForm" action="https://formspree.io/f/mdkebyqo" method="POST" class="space-y-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <input name="name" type="text" placeholder="Your Name" required />
+              <input name="email" type="email" placeholder="Your Email" required />
+            </div>
+            <input name="subject" type="text" placeholder="Subject" required />
+            <textarea name="message" placeholder="Your message…" rows="4" required></textarea>
+            <div class="flex items-center gap-3">
+              <button type="submit" id="sendBtn" class="btn-primary">Send Message</button>
+              <span id="formStatus" class="text-xs opacity-65"></span>
+            </div>
+          </form>
+        </section>
+
+      </section>
+    </main>
+
+    <footer class="mt-10 border-t border-gh-border dark:border-gh-dark-border py-8">
+      <div class="mx-auto max-w-6xl px-4 flex flex-wrap items-center justify-between gap-4 text-sm opacity-55">
+        <span>© 2025 Kiran Bandi. Built with care.</span>
+        <div class="flex items-center gap-4">
+          <a href="https://github.com/Kiranbandi02"          target="_blank" rel="noreferrer" class="hover:opacity-100 transition-opacity">GitHub</a>
+          <a href="https://www.linkedin.com/in/kiranbandi07/" target="_blank" rel="noreferrer" class="hover:opacity-100 transition-opacity">LinkedIn</a>
+          <a href="mailto:bandikiranbabu315@gmail.com"         class="hover:opacity-100 transition-opacity">Email</a>
+        </div>
+      </div>
     </footer>
 
-    <!-- JavaScript for smooth scrolling and active menu -->
     <script>
-        // Mobile menu toggle functionality
-        const menuBtn = document.querySelector('.menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-        
-        menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            
-            // Prevent scrolling when menu is open
-            document.body.style.overflow = menuBtn.classList.contains('active') ? 'hidden' : '';
+    (function () {
+      var root = document.documentElement;
+
+      /* ── Theme ──────────────────────────────────────── */
+      if (localStorage.getItem("theme") === "light") root.classList.remove("dark");
+      document.getElementById("themeToggle").addEventListener("click", function () {
+        root.classList.toggle("dark");
+        localStorage.setItem("theme", root.classList.contains("dark") ? "dark" : "light");
+      });
+
+      /* ── Tabs ───────────────────────────────────────── */
+      var tabUnderline = document.getElementById("tabUnderline");
+      var tabs = document.querySelectorAll(".tab-btn");
+      var tabTargets = { Overview: "hero", Repositories: "repos", Projects: "projects" };
+
+      function moveUnderline(btn) {
+        var r = btn.getBoundingClientRect();
+        var p = btn.parentElement.getBoundingClientRect();
+        tabUnderline.style.width = r.width + "px";
+        tabUnderline.style.transform = "translateX(" + (r.left - p.left) + "px)";
+      }
+      tabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          tabs.forEach(function (t) { t.classList.remove("active"); });
+          tab.classList.add("active");
+          moveUnderline(tab);
+          var id = tabTargets[tab.dataset.tab];
+          if (id) {
+            var el = document.getElementById(id);
+            var hh = document.getElementById("site-header").offsetHeight;
+            if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - hh - 8, behavior: "smooth" });
+          }
         });
-        
-        // Close menu when nav link is clicked
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuBtn.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            });
+      });
+      window.addEventListener("load",   function () { var a = document.querySelector(".tab-btn.active"); if (a) moveUnderline(a); });
+      window.addEventListener("resize", function () { var a = document.querySelector(".tab-btn.active"); if (a) moveUnderline(a); });
+
+      /* ── Typewriter ─────────────────────────────────── */
+      var roles = ["Full Stack Developer","Ruby on Rails Engineer","ML Enthusiast","Frontend Engineer","Backend Developer","Learning Go ⚡"];
+      var ri = 0, ci = 0, del = false;
+      var tw = document.getElementById("typewriter");
+      function tick() {
+        var r = roles[ri];
+        if (!del) { tw.textContent = r.slice(0, ++ci); if (ci === r.length) { del = true; setTimeout(tick, 1800); return; } }
+        else       { tw.textContent = r.slice(0, --ci); if (ci === 0) { del = false; ri = (ri+1) % roles.length; } }
+        setTimeout(tick, del ? 48 : 88);
+      }
+      setTimeout(tick, 900);
+
+      /* ── Scroll-spy ─────────────────────────────────── */
+      var spySections = ["hero","experience","skills","projects","contact"];
+      var navLinks    = document.querySelectorAll(".nav-link");
+      var spyEls      = spySections.map(function(id){ return document.getElementById(id); });
+      function updateNav() {
+        var sy = window.scrollY + document.getElementById("site-header").offsetHeight + 20;
+        var active = "hero";
+        spyEls.forEach(function(el,i){ if(el && el.offsetTop <= sy) active = spySections[i]; });
+        navLinks.forEach(function(l){ l.classList.toggle("active", l.dataset.section === active); });
+      }
+      window.addEventListener("scroll", updateNav, { passive: true });
+
+      /* ── Reveal ─────────────────────────────────────── */
+      var revObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (!e.isIntersecting) return;
+          e.target.style.transitionDelay = (e.target.getAttribute("data-delay") || "0") + "ms";
+          e.target.classList.add("in-view");
+          revObs.unobserve(e.target);
         });
-        
-        // Add smooth scrolling to all links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                
-                // Update active class
-                document.querySelectorAll('.navbar ul li').forEach(item => {
-                    item.classList.remove('active');
-                });
-                this.parentElement.classList.add('active');
-            });
+      }, { threshold: 0.1 });
+      document.querySelectorAll(".reveal").forEach(function(el){ revObs.observe(el); });
+
+      /* ── Stats counter ──────────────────────────────── */
+      var statObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (!e.isIntersecting) return;
+          statObs.unobserve(e.target);
+          e.target.querySelectorAll(".stat-number").forEach(function(el) {
+            var target = +el.dataset.target, cur = 0;
+            var iv = setInterval(function(){
+              cur = Math.min(cur + 1, target);
+              el.textContent = cur + "+";
+              if (cur >= target) clearInterval(iv);
+            }, 60);
+          });
         });
+      }, { threshold: 0.5 });
+      var hs = document.getElementById("statsRow");
+      if (hs) statObs.observe(hs);
 
-        // Update active class on scroll
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const sections = document.querySelectorAll('section');
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - sectionHeight/3)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            document.querySelectorAll('.navbar ul li').forEach(item => {
-                item.classList.remove('active');
-                if (item.querySelector('a').getAttribute('href') === `#${current}`) {
-                    item.classList.add('active');
-                }
-            });
+      /* ── Contribution graph ─────────────────────────── */
+      var svg = document.getElementById("contribSvg");
+      var W = 8, G = 3, weeks = 24, days = 7, idx = 0;
+      for (var w = 0; w < weeks; w++) {
+        for (var d = 0; d < days; d++) {
+          var lv = Math.floor(Math.random() * 5);
+          var rc = document.createElementNS("http://www.w3.org/2000/svg","rect");
+          rc.setAttribute("x", w*(W+G)); rc.setAttribute("y", d*(W+G));
+          rc.setAttribute("width", W); rc.setAttribute("height", W); rc.setAttribute("rx","2");
+          rc.setAttribute("data-level", lv);
+          rc.style.opacity = "0"; rc.style.transform = "scale(0.5)"; rc.style.transformOrigin = "center";
+          rc.style.transition = "opacity 0.4s ease "+(idx*5)+"ms, transform 0.4s ease "+(idx*5)+"ms";
+          svg.appendChild(rc); idx++;
+        }
+      }
+      /* fills adapt to dark/light */
+      function setContribFills() {
+        var dark = root.classList.contains("dark");
+        var fills = dark
+          ? ["rgba(48,54,61,0.6)","rgba(0,75,155,0.4)","rgba(0,100,200,0.6)","rgba(9,105,218,0.8)","rgba(58,151,255,1)"]
+          : ["rgba(209,213,218,0.8)","rgba(9,105,218,0.2)","rgba(9,105,218,0.45)","rgba(9,105,218,0.7)","rgba(9,105,218,1)"];
+        svg.querySelectorAll("rect").forEach(function(r){
+          r.setAttribute("fill", fills[+r.getAttribute("data-level")]);
         });
+      }
+      window.addEventListener("load", function(){
+        svg.querySelectorAll("rect").forEach(function(r){ r.style.opacity="1"; r.style.transform="scale(1)"; });
+        setContribFills();
+      });
+      document.getElementById("themeToggle").addEventListener("click", setContribFills);
 
-        // Form submission handling
-        const contactForm = document.getElementById('contactForm');
-        const formStatus = document.getElementById('form-status');
+      /* ── Contact form ───────────────────────────────── */
+      var cf = document.getElementById("contactForm");
+      var fs = document.getElementById("formStatus");
+      var sb = document.getElementById("sendBtn");
+      cf.addEventListener("submit", async function(e) {
+        e.preventDefault(); sb.textContent = "Sending…"; sb.disabled = true; fs.textContent = "";
+        try {
+          var res = await fetch(cf.action, { method:"POST", headers:{Accept:"application/json"}, body: new FormData(cf) });
+          fs.textContent = res.ok ? "✓ Message sent!" : "Failed — try emailing directly.";
+          if (res.ok) cf.reset();
+        } catch { fs.textContent = "Network error."; }
+        finally { sb.textContent = "Send Message"; sb.disabled = false; }
+      });
 
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(contactForm);
-            const data = Object.fromEntries(formData.entries());
-
-            try {
-                const response = await fetch(contactForm.action, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                if (response.ok) {
-                    formStatus.textContent = 'Message sent successfully!';
-                    formStatus.style.color = 'green';
-                    contactForm.reset();
-                } else {
-                    formStatus.textContent = 'Failed to send message. Please try again.';
-                    formStatus.style.color = 'red';
-                }
-            } catch (error) {
-                formStatus.textContent = 'An error occurred. Please try again later.';
-                formStatus.style.color = 'red';
-            }
+      /* ── Tilt (rotation only — no translation conflict) */
+      document.querySelectorAll(".tilt-el").forEach(function(el) {
+        el.addEventListener("mousemove", function(e) {
+          var r = el.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width;
+          var py = (e.clientY - r.top)  / r.height;
+          var rx2 = (py - 0.5) * -8;
+          var ry2 = (px - 0.5) *  8;
+          el.style.setProperty("--mx", (px*100)+"%");
+          el.style.setProperty("--my", (py*100)+"%");
+          el.style.transform = "perspective(900px) rotateX("+rx2+"deg) rotateY("+ry2+"deg)";
         });
+        el.addEventListener("mouseleave", function(){
+          el.style.transform = "";
+          el.style.removeProperty("--mx");
+          el.style.removeProperty("--my");
+        });
+      });
+
+      /* ── Particles ──────────────────────────────────── */
+      var canvas = document.getElementById("heroParticles");
+      var ctx2   = canvas.getContext("2d");
+      var pts = [];
+      function resz(){ canvas.width=innerWidth; canvas.height=innerHeight; }
+      resz(); window.addEventListener("resize", resz);
+      for (var i=0;i<25;i++) pts.push({
+        x:Math.random()*innerWidth, y:Math.random()*innerHeight,
+        r:Math.random()*1.4+0.4,
+        vx:(Math.random()-0.5)*0.2, vy:(Math.random()-0.5)*0.2,
+        o:Math.random()*0.25+0.07
+      });
+      function drawPts(){
+        ctx2.clearRect(0,0,canvas.width,canvas.height);
+        var col = root.classList.contains("dark") ? "88,166,255" : "9,105,218";
+        for(var i=0;i<pts.length;i++){
+          var p=pts[i]; p.x+=p.vx; p.y+=p.vy;
+          if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
+          if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;
+          ctx2.beginPath(); ctx2.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx2.fillStyle="rgba("+col+","+p.o+")"; ctx2.fill();
+        }
+        requestAnimationFrame(drawPts);
+      }
+      drawPts();
+    })();
     </script>
-</body>
-
+  </body>
 </html>
