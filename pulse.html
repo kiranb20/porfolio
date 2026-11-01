@@ -1,320 +1,191 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Pulse — a friendlier, read-only Activity Monitor for macOS with plain-English insights, live network speed, a menu bar readout and desktop widgets. By Kiran Bandi." />
-    <title>Pulse — Activity Monitor for macOS · Kiran Bandi</title>
-    <meta property="og:title" content="Pulse — Activity Monitor for macOS" />
-    <meta property="og:description" content="Live CPU, memory, disk and network speed in plain English, with a menu bar readout and desktop widgets. Installs with one command." />
-    <meta property="og:image" content="pulse-overview.png" />
-    <link rel="icon" href="pulse-icon.png" type="image/png" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "gh-bg": "#ffffff", "gh-text": "#24292f", "gh-border": "#d0d7de",
-              "gh-panel": "#f6f8fa", "gh-hover": "#eef2f6", "gh-accent": "#0969da",
-              "gh-dark-bg": "#0d1117", "gh-dark-text": "#c9d1d9",
-              "gh-dark-border": "#30363d", "gh-dark-panel": "#161b22", "gh-dark-hover": "#1f242c",
-            },
-            fontFamily: {
-              sans: ["Inter", "system-ui", "sans-serif"],
-              mono: ["Geist Mono", "ui-monospace", "monospace"],
-            },
-          },
-        },
-      };
-    </script>
-  </head>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pulse — Activity Monitor for macOS · Kiran Bandi</title>
+  <meta name="description" content="Pulse — a friendlier, read-only Activity Monitor for macOS with plain-English insights, live network speed, a menu bar readout and desktop widgets. By Kiran Bandi." />
+  <meta property="og:title" content="Pulse — Activity Monitor for macOS" />
+  <meta property="og:description" content="Live CPU, memory, disk and network speed in plain English, with a menu bar readout and desktop widgets. Installs with one command." />
+  <meta property="og:image" content="img/pulse-overview.jpg" />
+  <link rel="icon" href="img/pulse-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    (function () {
+      var t = localStorage.getItem("theme");
+      if (!t) t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.dataset.theme = t;
+      document.documentElement.classList.add("js");
+    })();
+  </script>
+</head>
+<body>
+  <a href="#features" class="skip">Skip to content</a>
 
-  <body class="min-h-screen bg-gh-bg text-gh-text dark:bg-gh-dark-bg dark:text-gh-dark-text transition-colors">
-    <canvas id="heroParticles" aria-hidden="true"></canvas>
+  <div class="nav-wrap">
+    <nav class="nav" aria-label="Main">
+      <a href="index.html" class="brand">Kiran Bandi</a>
+      <a href="index.html#work" class="link">← Portfolio</a>
+      <a href="#features" class="link hide-sm">Features</a>
+      <a href="#screenshots" class="link hide-sm">Screenshots</a>
+      <a href="#install" class="link">Install</a>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle light / dark theme"><span class="t-sun">☀️</span><span class="t-moon">🌙</span></button>
+      <a href="https://github.com/Kiranbandi02/pulse" target="_blank" rel="noreferrer" class="btn btn-primary">GitHub</a>
+    </nav>
+  </div>
 
-    <!-- HEADER -->
-    <header id="site-header" class="sticky top-0 z-40 bg-gh-bg dark:bg-gh-dark-bg border-b border-gh-border dark:border-gh-dark-border">
-      <div class="mx-auto max-w-6xl px-4 py-3 flex flex-wrap items-center gap-3">
-        <a href="index.html" class="brand">
-          <div class="brand-avatar">KB</div>
-          <span class="font-semibold tracking-tight">Kiran Bandi</span>
-        </a>
-
-        <nav class="flex flex-wrap items-center gap-1 text-xs ml-auto">
-          <a href="index.html#projects" class="nav-link">← Portfolio</a>
-          <a href="#features"    class="nav-link">Features</a>
-          <a href="#screenshots" class="nav-link">Screenshots</a>
-          <a href="#install"     class="nav-link">Install</a>
-          <a href="#under-the-hood" class="nav-link">Under the hood</a>
-        </nav>
-
-        <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
-          <span class="sun">☀️</span><span class="moon">🌙</span>
-        </button>
+  <main>
+    <!-- HERO -->
+    <header class="page-hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="app-title reveal">
+              <img src="img/pulse-icon.png" alt="Pulse app icon" width="76" height="76" />
+              <div><h1>Pulse</h1><div class="mono">macOS · Swift · SwiftUI</div></div>
+            </div>
+            <p class="tagline reveal">A friendlier Activity Monitor that tells you what your Mac is actually doing.</p>
+            <p class="copy reveal">Live CPU, memory, disk and network speed, explained in plain English instead of jargon. See at a glance whether your Mac is healthy, which app is slowing it down, and how fast your internet is — from the app, the menu bar, or a desktop widget. It only <em>reads</em> system statistics: it never quits or changes anything.</p>
+            <div class="hero-cta reveal">
+              <a href="#install" class="btn btn-primary">Install in one command</a>
+              <a href="https://github.com/Kiranbandi02/pulse/releases/latest/download/Pulse.zip" class="btn btn-ghost">Download .zip</a>
+            </div>
+            <div class="chips reveal" style="margin-top:24px">
+              <span class="chip">Swift</span><span class="chip">SwiftUI</span><span class="chip">Swift Charts</span><span class="chip">WidgetKit</span><span class="chip">libproc</span><span class="chip">IOKit</span>
+            </div>
+          </div>
+          <div class="reveal">
+            <div class="win full"><div class="win-bar"><i></i><i></i><i></i></div><img src="img/pulse-overview.jpg" alt="Pulse overview: health summary, processor, memory, network and disk cards" /></div>
+          </div>
+        </div>
       </div>
     </header>
 
-    <main class="mx-auto max-w-6xl px-4 py-10 space-y-16">
-
-      <!-- HERO -->
-      <section id="hero" class="grid lg:grid-cols-[1fr_1.15fr] gap-10 items-center">
-        <div class="space-y-5 reveal">
-          <div class="flex items-center gap-4">
-            <img src="pulse-icon.png" alt="Pulse app icon" class="app-icon" />
-            <div>
-              <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Pulse</h1>
-              <div class="text-sm opacity-60 font-mono mt-1">macOS · Swift · SwiftUI</div>
-            </div>
-          </div>
-          <p class="text-xl font-semibold leading-snug">A friendlier Activity Monitor that tells you what your Mac is actually doing.</p>
-          <p class="opacity-70 leading-relaxed">
-            Live CPU, memory, disk and network speed — explained in plain English instead of jargon.
-            See at a glance whether your Mac is healthy, which app is slowing it down, and how fast your internet is,
-            from the app, the menu bar, or a desktop widget. It only <em>reads</em> system statistics: it never quits or changes anything.
-          </p>
-          <div class="flex flex-wrap gap-3 pt-1">
-            <a href="#install" class="btn-primary">Install in one command</a>
-            <a href="https://github.com/Kiranbandi02/pulse" target="_blank" rel="noreferrer" class="btn-secondary">View on GitHub</a>
-            <a href="https://github.com/Kiranbandi02/pulse/releases/latest/download/Pulse.zip" class="btn-secondary">Download .zip</a>
-          </div>
-          <div class="flex flex-wrap gap-1.5 pt-1">
-            <span class="tech-chip-sm">Swift</span>
-            <span class="tech-chip-sm">SwiftUI</span>
-            <span class="tech-chip-sm">Swift Charts</span>
-            <span class="tech-chip-sm">WidgetKit</span>
-            <span class="tech-chip-sm">libproc</span>
-            <span class="tech-chip-sm">IOKit</span>
-            <span class="tech-chip-sm">Mach APIs</span>
-          </div>
-        </div>
-
-        <div class="reveal" data-delay="120">
-          <div class="mac-window">
-            <div class="mac-bar"><i></i><i></i><i></i><span>Pulse — Overview</span></div>
-            <img src="pulse-overview.png" alt="Pulse overview: health summary, processor, memory, network and disk cards" />
-          </div>
-        </div>
-      </section>
-
-      <!-- FEATURES -->
-      <section id="features" class="space-y-6">
-        <div class="section-header reveal">
-          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" class="text-gh-accent"><path d="m8 .25.345.666 2.658 5.127 5.658.824-4.065 3.966.959 5.584L8 13.75l-5.555 2.917.96-5.584-4.066-3.966 5.659-.824L8 .25Z"/></svg>
-          What it does
-        </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-
-          <div class="feature-card reveal">
-            <div class="feature-icon">✅</div>
-            <div class="font-semibold">Health at a glance</div>
-            <p class="text-sm opacity-70">A one-line verdict — “Everything looks healthy” or “Memory is getting tight” — and, when something is wrong, which app is responsible.</p>
-          </div>
-
-          <div class="feature-card reveal" data-delay="60">
-            <div class="feature-icon">⚡</div>
-            <div class="font-semibold">Live network speed</div>
-            <p class="text-sm opacity-70">Download and upload speed, a 3-minute graph, session peaks and data totals. Switch between MB/s and Mbps to compare with your internet plan.</p>
-          </div>
-
-          <div class="feature-card reveal" data-delay="120">
-            <div class="feature-icon">🧩</div>
-            <div class="font-semibold">Desktop widgets</div>
-            <p class="text-sm opacity-70">Small, medium and large widgets show processor, memory, disk, battery and network speed without opening the app.</p>
-          </div>
-
-          <div class="feature-card reveal">
-            <div class="feature-icon">📊</div>
-            <div class="font-semibold">Menu bar readout</div>
-            <p class="text-sm opacity-70">Download stacked above upload in the menu bar, plus a quick panel with CPU, memory and disk rings and your busiest apps.</p>
-          </div>
-
-          <div class="feature-card reveal" data-delay="60">
-            <div class="feature-icon">🧠</div>
-            <div class="font-semibold">Explains, not just measures</div>
-            <p class="text-sm opacity-70">Memory is split into “Apps / Locked by macOS / Compressed / Cached / Free” with a sentence on what each means. Common system processes are described in plain words.</p>
-          </div>
-
-          <div class="feature-card reveal" data-delay="120">
-            <div class="feature-icon">🔒</div>
-            <div class="font-semibold">Read-only by design</div>
-            <p class="text-sm opacity-70">No kill or quit buttons, no background services, no data leaves your Mac. It can look, but it can’t touch.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- SCREENSHOTS -->
-      <section id="screenshots" class="space-y-6">
-        <div class="section-header reveal">
-          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" class="text-gh-accent"><path d="M16 13.25A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25V2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75ZM1.75 2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h.94l6.75-6.75a.75.75 0 0 1 1.06 0l3.5 3.5V2.75a.25.25 0 0 0-.25-.25ZM14.5 11.62l-4.03-4.03-5.66 5.66h9.44a.25.25 0 0 0 .25-.25ZM5 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"/></svg>
-          Screenshots
-        </div>
-        <div class="grid md:grid-cols-2 gap-8 items-start">
-
-          <figure class="reveal space-y-3">
-            <a href="pulse-network.png" target="_blank" class="shot-link">
-              <div class="mac-window"><div class="mac-bar"><i></i><i></i><i></i><span>Network</span></div><img src="pulse-network.png" alt="Network page with live download and upload speed graph" loading="lazy" /></div>
-            </a>
-            <figcaption class="text-sm opacity-70"><strong>Network.</strong> Live speed, a 3-minute graph, peaks, and data used since you opened the app and since your Mac restarted.</figcaption>
-          </figure>
-
-          <figure class="reveal space-y-3" data-delay="100">
-            <a href="pulse-processor.png" target="_blank" class="shot-link">
-              <div class="mac-window"><div class="mac-bar"><i></i><i></i><i></i><span>Processor</span></div><img src="pulse-processor.png" alt="Processor page with usage split, load average and per-core bars" loading="lazy" /></div>
-            </a>
-            <figcaption class="text-sm opacity-70"><strong>Processor.</strong> Work done by your apps versus macOS itself, load average explained, and a bar for every core.</figcaption>
-          </figure>
-
-          <figure class="reveal space-y-3">
-            <a href="pulse-memory.png" target="_blank" class="shot-link">
-              <div class="mac-window"><div class="mac-bar"><i></i><i></i><i></i><span>Memory</span></div><img src="pulse-memory.png" alt="Memory page with breakdown bar and plain-English legend" loading="lazy" /></div>
-            </a>
-            <figcaption class="text-sm opacity-70"><strong>Memory.</strong> Where your RAM is going, with memory pressure and swap explained in one sentence each.</figcaption>
-          </figure>
-
-          <figure class="reveal space-y-3" data-delay="100">
-            <a href="pulse-processes.png" target="_blank" class="shot-link">
-              <div class="mac-window"><div class="mac-bar"><i></i><i></i><i></i><span>Processes</span></div><img src="pulse-processes.png" alt="Searchable process list with app icons and descriptions" loading="lazy" /></div>
-            </a>
-            <figcaption class="text-sm opacity-70"><strong>Processes.</strong> Browser and editor helper processes are combined under their app, and system services say what they do.</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <!-- INSTALL -->
-      <section id="install" class="panel reveal space-y-5">
-        <div class="section-header">
-          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" class="text-gh-accent"><path d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z"/><path d="M7.25 7.689V2a.75.75 0 0 1 1.5 0v5.689l1.97-1.969a.749.749 0 1 1 1.06 1.06l-3.25 3.25a.749.749 0 0 1-1.06 0L4.22 6.78a.749.749 0 1 1 1.06-1.06l1.97 1.969Z"/></svg>
-          Install
-        </div>
-
-        <div class="flex gap-3">
-          <div class="step-num">1</div>
-          <div class="min-w-0 flex-1 space-y-2">
-            <div class="font-semibold">Paste this into Terminal</div>
-            <div class="code-block" id="installCmd">curl -fsSL https://raw.githubusercontent.com/Kiranbandi02/pulse/main/install.sh | bash<button class="copy-btn" data-copy="curl -fsSL https://raw.githubusercontent.com/Kiranbandi02/pulse/main/install.sh | bash">Copy</button></div>
-            <p class="text-sm opacity-65">Downloads the latest release, installs it into <span class="font-mono">/Applications</span> and opens it. Needs macOS 14 or later.</p>
-          </div>
-        </div>
-
-        <div class="flex gap-3">
-          <div class="step-num">2</div>
-          <div class="min-w-0 flex-1 space-y-1">
-            <div class="font-semibold">Add the widget</div>
-            <p class="text-sm opacity-65">Right-click the desktop → <em>Edit Widgets</em> → <em>System Pulse</em>, then pick small, medium or large.</p>
-          </div>
-        </div>
-
-        <div class="flex gap-3">
-          <div class="step-num">3</div>
-          <div class="min-w-0 flex-1 space-y-2">
-            <div class="font-semibold">Uninstall any time</div>
-            <div class="code-block">curl -fsSL https://raw.githubusercontent.com/Kiranbandi02/pulse/main/install.sh | bash -s -- --uninstall<button class="copy-btn" data-copy="curl -fsSL https://raw.githubusercontent.com/Kiranbandi02/pulse/main/install.sh | bash -s -- --uninstall">Copy</button></div>
-          </div>
-        </div>
-
-        <p class="text-xs opacity-55 leading-relaxed">
-          Pulse is ad-hoc signed rather than notarized, so the one-line installer above is the smoothest route.
-          If you download the zip in a browser instead, macOS will ask you to right-click the app and choose <em>Open</em> the first time.
-          You can also build it from source with just the Xcode Command Line Tools: <span class="font-mono">./build.sh install</span>.
-        </p>
-      </section>
-
-      <!-- UNDER THE HOOD -->
-      <section id="under-the-hood" class="space-y-6">
-        <div class="section-header reveal">
-          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" class="text-gh-accent"><path d="m11.28 3.22 4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L13.94 8l-3.72-3.72a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215Zm-6.56 0a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L2.06 8l3.72 3.72a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L.47 8.53a.75.75 0 0 1 0-1.06Z"/></svg>
-          Under the hood
-        </div>
-        <div class="grid md:grid-cols-2 gap-5">
-
-          <div class="panel reveal space-y-2">
-            <div class="font-semibold">Measured the way Activity Monitor does</div>
-            <ul class="text-sm opacity-75 space-y-1.5 list-disc pl-5">
-              <li><b>CPU</b> from per-core tick counters (<span class="font-mono">host_processor_info</span>).</li>
-              <li><b>Memory</b> from <span class="font-mono">host_statistics64</span>, using Activity Monitor’s own definitions of App, Wired, Compressed and Cached.</li>
-              <li><b>Per-process figures</b> from <span class="font-mono">proc_pid_rusage</span> — the physical footprint macOS itself reports.</li>
-              <li><b>Disk and battery</b> through IOKit.</li>
-            </ul>
-          </div>
-
-          <div class="panel reveal space-y-2" data-delay="80">
-            <div class="font-semibold">Accurate network numbers</div>
-            <ul class="text-sm opacity-75 space-y-1.5 list-disc pl-5">
-              <li>Reads <b>64-bit interface counters</b> from the routing socket (<span class="font-mono">NET_RT_IFLIST2</span>). The common <span class="font-mono">getifaddrs</span> counters are 32-bit and wrap around every 4 GB, which would show false spikes on fast connections.</li>
-              <li>Counts physical links only, so a VPN tunnel isn’t counted twice.</li>
-            </ul>
-          </div>
-
-          <div class="panel reveal space-y-2">
-            <div class="font-semibold">Light on your Mac</div>
-            <ul class="text-sm opacity-75 space-y-1.5 list-disc pl-5">
-              <li>Uses roughly 4–5% of a single core with the window open.</li>
-              <li>The costly process scan pauses when no Pulse window is on screen; the menu bar speed only needs a ~6&nbsp;ms system sample each second.</li>
-              <li>Root-owned processes (like <span class="font-mono">WindowServer</span>) can’t be read through libproc, so they’re filled in via the system’s setuid <span class="font-mono">ps</span> — still strictly read-only.</li>
-            </ul>
-          </div>
-
-          <div class="panel reveal space-y-2" data-delay="80">
-            <div class="font-semibold">Trade-offs I made on purpose</div>
-            <ul class="text-sm opacity-75 space-y-1.5 list-disc pl-5">
-              <li><b>No per-app network usage.</b> Prototyping it with <span class="font-mono">nettop</span> cost about 1.3 CPU cores continuously — too heavy for a monitor — so I removed it.</li>
-              <li><b>Not on the App Store.</b> The sandbox it requires would block reading other processes’ stats, which is the core feature.</li>
-              <li><b>Built without Xcode.</b> A single <span class="font-mono">build.sh</span> compiles a universal (Apple Silicon + Intel) binary, assembles the app and widget extension, and signs them.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- CTA -->
-      <section class="panel reveal text-center space-y-4">
-        <div class="text-xl font-bold">Take a look at the code</div>
-        <p class="text-sm opacity-70 max-w-xl mx-auto">Pulse is open source. Issues, ideas and pull requests are welcome.</p>
-        <div class="flex flex-wrap justify-center gap-3">
-          <a href="https://github.com/Kiranbandi02/pulse" target="_blank" rel="noreferrer" class="btn-primary">github.com/Kiranbandi02/pulse</a>
-          <a href="index.html#projects" class="btn-secondary">← Back to portfolio</a>
-        </div>
-      </section>
-    </main>
-
-    <footer class="mt-10 border-t border-gh-border dark:border-gh-dark-border py-8">
-      <div class="mx-auto max-w-6xl px-4 flex flex-wrap items-center justify-between gap-4 text-sm opacity-55">
-        <span>© 2025 Kiran Bandi. Built with care.</span>
-        <div class="flex items-center gap-4">
-          <a href="https://github.com/Kiranbandi02"          target="_blank" rel="noreferrer" class="hover:opacity-100 transition-opacity">GitHub</a>
-          <a href="https://www.linkedin.com/in/kiranbandi07/" target="_blank" rel="noreferrer" class="hover:opacity-100 transition-opacity">LinkedIn</a>
-          <a href="mailto:bandikiranbabu315@gmail.com"         class="hover:opacity-100 transition-opacity">Email</a>
+    <!-- FEATURES -->
+    <section id="features">
+      <div class="container">
+        <div class="sec-head reveal"><div><div class="eyebrow">Features</div><h2>What it does</h2></div></div>
+        <div class="grid-3">
+          <div class="card feat reveal"><div class="ico">✅</div><h3>Health at a glance</h3><p>A one-line verdict — “Everything looks healthy” or “Memory is getting tight” — and, when something is wrong, which app is responsible.</p></div>
+          <div class="card feat reveal"><div class="ico">⚡</div><h3>Live network speed</h3><p>Download and upload speed, a 3-minute graph, session peaks and data totals. Switch between MB/s and Mbps to compare with your internet plan.</p></div>
+          <div class="card feat reveal"><div class="ico">🧩</div><h3>Desktop widgets</h3><p>Small, medium and large widgets show processor, memory, disk, battery and network speed without opening the app.</p></div>
+          <div class="card feat reveal"><div class="ico">📊</div><h3>Menu bar readout</h3><p>Download stacked above upload in the menu bar, plus a quick panel with CPU, memory and disk rings and your busiest apps.</p></div>
+          <div class="card feat reveal"><div class="ico">🧠</div><h3>Explains, not just measures</h3><p>Memory is split into “Apps / Locked by macOS / Compressed / Cached / Free” with a sentence on what each means. Common system processes are described in plain words.</p></div>
+          <div class="card feat reveal"><div class="ico">🔒</div><h3>Read-only by design</h3><p>No kill or quit buttons, no background services, no data leaves your Mac. It can look, but it can’t touch.</p></div>
         </div>
       </div>
-    </footer>
+    </section>
 
-    <script>
+    <!-- SCREENSHOTS -->
+    <section id="screenshots">
+      <div class="container">
+        <div class="sec-head reveal"><div><div class="eyebrow">Screenshots</div><h2>A closer look</h2></div></div>
+        <div class="shots">
+          <figure class="reveal"><a href="img/pulse-network.jpg" target="_blank"><div class="win full"><div class="win-bar"><i></i><i></i><i></i></div><img src="img/pulse-network.jpg" alt="Network page with live download and upload speed graph" loading="lazy" /></div></a><figcaption><b>Network.</b> Live speed, a 3-minute graph, peaks, and data used since you opened the app and since your Mac restarted.</figcaption></figure>
+          <figure class="reveal"><a href="img/pulse-processor.jpg" target="_blank"><div class="win full"><div class="win-bar"><i></i><i></i><i></i></div><img src="img/pulse-processor.jpg" alt="Processor page with usage split, load average and per-core bars" loading="lazy" /></div></a><figcaption><b>Processor.</b> Work done by your apps versus macOS itself, load average explained, and a bar for every core.</figcaption></figure>
+          <figure class="reveal"><a href="img/pulse-memory.jpg" target="_blank"><div class="win full"><div class="win-bar"><i></i><i></i><i></i></div><img src="img/pulse-memory.jpg" alt="Memory page with breakdown bar and plain-English legend" loading="lazy" /></div></a><figcaption><b>Memory.</b> Where your RAM is going, with memory pressure and swap explained in one sentence each.</figcaption></figure>
+          <figure class="reveal"><a href="img/pulse-processes.jpg" target="_blank"><div class="win full"><div class="win-bar"><i></i><i></i><i></i></div><img src="img/pulse-processes.jpg" alt="Searchable process list with app icons and descriptions" loading="lazy" /></div></a><figcaption><b>Processes.</b> Browser and editor helper processes are combined under their app, and system services say what they do.</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTALL -->
+    <section id="install">
+      <div class="container">
+        <div class="sec-head reveal"><div><div class="eyebrow">Install</div><h2>Up and running in a minute</h2></div></div>
+        <div class="card install reveal">
+          <div class="step"><div class="step-n">1</div><div>
+            <h3>Paste this into Terminal</h3>
+            <div class="code">curl -fsSL https://raw.githubusercontent.com/Kiranbandi02/pulse/main/install.sh | bash<button class="copy-btn" data-copy="curl -fsSL https://raw.githubusercontent.com/Kiranbandi02/pulse/main/install.sh | bash">Copy</button></div>
+            <p>Downloads the latest release, installs it into <code>/Applications</code> and opens it. Needs macOS 14 or later.</p>
+          </div></div>
+          <div class="step"><div class="step-n">2</div><div>
+            <h3>Add the widget</h3>
+            <p>Right-click the desktop → <em>Edit Widgets</em> → <em>System Pulse</em>, then pick small, medium or large.</p>
+          </div></div>
+          <div class="step"><div class="step-n">3</div><div>
+            <h3>Uninstall any time</h3>
+            <div class="code">curl -fsSL https://raw.githubusercontent.com/Kiranbandi02/pulse/main/install.sh | bash -s -- --uninstall<button class="copy-btn" data-copy="curl -fsSL https://raw.githubusercontent.com/Kiranbandi02/pulse/main/install.sh | bash -s -- --uninstall">Copy</button></div>
+          </div></div>
+          <p class="fine">Pulse is ad-hoc signed rather than notarized, so the one-line installer above is the smoothest route. If you download the zip in a browser instead, macOS will ask you to right-click the app and choose <em>Open</em> the first time. You can also build it from source with just the Xcode Command Line Tools: <code>./build.sh install</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- UNDER THE HOOD -->
+    <section id="under-the-hood">
+      <div class="container">
+        <div class="sec-head reveal"><div><div class="eyebrow">Engineering</div><h2>Under the hood</h2></div></div>
+        <div class="grid-2">
+          <div class="card tile reveal"><h3>Measured the way Activity Monitor does</h3>
+            <ul class="list">
+              <li><b>CPU</b> from per-core tick counters (<code>host_processor_info</code>).</li>
+              <li><b>Memory</b> from <code>host_statistics64</code>, using Activity Monitor’s own definitions of App, Wired, Compressed and Cached.</li>
+              <li><b>Per-process figures</b> from <code>proc_pid_rusage</code> — the physical footprint macOS itself reports.</li>
+              <li><b>Disk and battery</b> through IOKit.</li>
+            </ul></div>
+          <div class="card tile reveal"><h3>Accurate network numbers</h3>
+            <ul class="list">
+              <li>Reads <b>64-bit interface counters</b> from the routing socket (<code>NET_RT_IFLIST2</code>). The common <code>getifaddrs</code> counters are 32-bit and wrap around every 4 GB, which would show false spikes on fast connections.</li>
+              <li>Counts physical links only, so a VPN tunnel isn’t counted twice.</li>
+            </ul></div>
+          <div class="card tile reveal"><h3>Light on your Mac</h3>
+            <ul class="list">
+              <li>Uses roughly 4–5% of a single core with the window open.</li>
+              <li>The costly process scan pauses when no Pulse window is on screen; the menu bar speed only needs a ~6&nbsp;ms system sample each second.</li>
+              <li>Root-owned processes (like <code>WindowServer</code>) can’t be read through libproc, so they’re filled in via the system’s setuid <code>ps</code> — still strictly read-only.</li>
+            </ul></div>
+          <div class="card tile reveal"><h3>Trade-offs I made on purpose</h3>
+            <ul class="list">
+              <li><b>No per-app network usage.</b> Prototyping it with <code>nettop</code> cost about 1.3 CPU cores continuously — too heavy for a monitor — so I removed it.</li>
+              <li><b>Not on the App Store.</b> The sandbox it requires would block reading other processes’ stats, which is the core feature.</li>
+              <li><b>Built without Xcode.</b> A single <code>build.sh</code> compiles a universal (Apple Silicon + Intel) binary, assembles the app and widget extension, and signs them.</li>
+            </ul></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section>
+      <div class="container">
+        <div class="card cta reveal">
+          <h2>Take a look at the code</h2>
+          <p>Pulse is open source. Issues, ideas and pull requests are welcome.</p>
+          <div class="row-btn">
+            <a href="https://github.com/Kiranbandi02/pulse" target="_blank" rel="noreferrer" class="btn btn-primary">View on GitHub</a>
+            <a href="index.html#work" class="btn btn-ghost">← Back to portfolio</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot">
+      <span>© 2025 Kiran Bandi</span>
+      <div>
+        <a href="https://github.com/Kiranbandi02" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/kiranbandi07/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:bandikiranbabu315@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
     (function () {
       var root = document.documentElement;
-
-      /* Theme (shared with the main portfolio via localStorage) */
-      if (localStorage.getItem("theme") === "light") root.classList.remove("dark");
       document.getElementById("themeToggle").addEventListener("click", function () {
-        root.classList.toggle("dark");
-        localStorage.setItem("theme", root.classList.contains("dark") ? "dark" : "light");
+        var next = root.dataset.theme === "dark" ? "light" : "dark";
+        root.dataset.theme = next; localStorage.setItem("theme", next);
       });
-
-      /* Reveal on scroll */
-      var revObs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (!e.isIntersecting) return;
-          e.target.style.transitionDelay = (e.target.getAttribute("data-delay") || "0") + "ms";
-          e.target.classList.add("in-view");
-          revObs.unobserve(e.target);
-        });
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
       }, { threshold: 0.1 });
-      document.querySelectorAll(".reveal").forEach(function (el) { revObs.observe(el); });
+      document.querySelectorAll(".reveal").forEach(function (el, i) { el.style.transitionDelay = (i % 3) * 60 + "ms"; io.observe(el); });
 
-      /* Copy buttons */
       document.querySelectorAll(".copy-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
           var text = btn.getAttribute("data-copy");
@@ -326,33 +197,7 @@
           }
         });
       });
-
-      /* Particles (same as the main page) */
-      var canvas = document.getElementById("heroParticles");
-      var ctx2 = canvas.getContext("2d");
-      var pts = [];
-      function resz() { canvas.width = innerWidth; canvas.height = innerHeight; }
-      resz(); window.addEventListener("resize", resz);
-      for (var i = 0; i < 25; i++) pts.push({
-        x: Math.random() * innerWidth, y: Math.random() * innerHeight,
-        r: Math.random() * 1.4 + 0.4,
-        vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2,
-        o: Math.random() * 0.25 + 0.07
-      });
-      function drawPts() {
-        ctx2.clearRect(0, 0, canvas.width, canvas.height);
-        var col = root.classList.contains("dark") ? "88,166,255" : "9,105,218";
-        for (var i = 0; i < pts.length; i++) {
-          var p = pts[i]; p.x += p.vx; p.y += p.vy;
-          if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
-          if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
-          ctx2.beginPath(); ctx2.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx2.fillStyle = "rgba(" + col + "," + p.o + ")"; ctx2.fill();
-        }
-        requestAnimationFrame(drawPts);
-      }
-      drawPts();
     })();
-    </script>
-  </body>
+  </script>
+</body>
 </html>
