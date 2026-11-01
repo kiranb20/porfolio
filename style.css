@@ -193,7 +193,6 @@ footer { padding: 32px 0 48px; border-top: 1px solid var(--border); margin-top: 
   .grid-2 { grid-template-columns: 1fr; }
   .project .thumb { width: 104px; margin: 12px 0 12px 12px; }
   .project .pbody { padding: 16px; }
-  .nav a.link.hide-sm { display: none; }
   .stack-row { grid-template-columns: 1fr; gap: 6px; }
   .row { grid-template-columns: 1fr; }
   .featured .body { padding: 28px 24px; }
@@ -247,4 +246,76 @@ footer { padding: 32px 0 48px; border-top: 1px solid var(--border); margin-top: 
   .grid-3 { grid-template-columns: 1fr; }
   .install { padding: 24px; }
   .app-title img { width: 60px; height: 60px; border-radius: 14px; }
+}
+
+/* ───────── Mobile & touch polish ───────── */
+html { -webkit-tap-highlight-color: transparent; }
+a, button, summary, input, textarea { touch-action: manipulation; }
+.nav .brand { white-space: nowrap; }
+.links { display: flex; align-items: center; gap: 4px; }
+.menu-btn { display: none; margin: 0; }
+.nav .nav-cta { margin-left: 2px; }
+.tap-hint { display: none; }
+.nav a.link.only-menu { display: none; }
+/* notches and rounded corners (needs viewport-fit=cover) */
+.container, .nav { padding-left: max(24px, env(safe-area-inset-left)); padding-right: max(24px, env(safe-area-inset-right)); }
+.nav-wrap { padding-top: env(safe-area-inset-top); }
+footer { padding-bottom: max(48px, calc(env(safe-area-inset-bottom) + 24px)); }
+
+/* comfortable touch targets on phones and tablets */
+@media (pointer: coarse) {
+  .icon-btn { width: 44px; height: 44px; }
+  .btn, .btn-sm { min-height: 44px; }
+  .nav a.link { padding: 11px 14px; }
+  .socials { gap: 6px; }
+  .socials a { padding: 12px 10px; }
+  .foot a { padding: 10px 4px; }
+  .copy-btn { min-height: 36px; padding: 6px 14px; }
+  .email { padding: 6px 0; }
+}
+/* no sticky "hover" lifts on touch screens; give a press response instead */
+@media (hover: none) {
+  .project:hover, .featured:hover, .tile:hover, .tl:hover, .btn:hover, .shots a:hover { transform: none; box-shadow: none; }
+  .project:hover .thumb img { transform: none; }
+  .btn:active { transform: scale(0.97); }
+  .project:active, .featured:active { border-color: var(--border-strong); }
+}
+
+@media (max-width: 700px) {
+  .nav { padding-top: 8px; padding-bottom: 8px; gap: 6px; }
+  .menu-btn { display: grid; }
+  .nav .nav-cta { padding: 8px 14px; font-size: 0.85rem; }
+  .links { display: none; }
+  .nav-wrap.open .links {
+    display: flex; flex-direction: column; align-items: stretch; gap: 0;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+    padding: 6px max(16px, env(safe-area-inset-left)) 14px;
+    box-shadow: 0 18px 30px rgba(0,0,0,0.25);
+  }
+  .nav-wrap.open .links a.link { font-size: 1.05rem; padding: 14px 8px; border-radius: 10px; color: var(--fg); border-bottom: 1px solid var(--border); border-radius: 0; }
+  .nav-wrap.open .links a.link.only-menu { display: block; }
+  .nav-wrap.open .links a.link:last-child { border-bottom: 0; }
+  section { padding: 44px 0; }
+  .hero { padding-bottom: 40px; }
+  .page-hero { padding-bottom: 36px; }
+  .stats { margin-top: 36px; padding-top: 22px; }
+  .sec-head { margin-bottom: 24px; }
+  .sec-head p { font-size: 0.95rem; }
+  .tap-hint { display: block; font-size: 0.82rem; color: var(--faint); }
+  .tile { padding: 22px; }
+  .tl { padding: 20px; }
+  .install { padding: 22px; }
+  .code { padding: 14px 14px 52px; font-size: 0.74rem; }
+  .copy-btn { top: auto; bottom: 8px; right: 8px; }
+  .lead, .page-hero p.copy { font-size: 1.02rem; }
+}
+@media (max-width: 380px) {
+  .container, .nav { padding-left: max(18px, env(safe-area-inset-left)); padding-right: max(18px, env(safe-area-inset-right)); }
+  h1 { letter-spacing: -0.035em; }
+  .stats { gap: 22px; }
+  .stat b { font-size: 1.6rem; }
+  .project .thumb { width: 88px; }
+  .contact, .cta { padding: 24px 20px; }
+  .btn { padding: 11px 16px; }
 }

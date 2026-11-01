@@ -2,7 +2,8 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
   <title>Pulse — Activity Monitor for macOS · Kiran Bandi</title>
   <meta name="description" content="Pulse — a friendlier, read-only Activity Monitor for macOS with plain-English insights, live network speed, a menu bar readout and desktop widgets. By Kiran Bandi." />
   <meta property="og:title" content="Pulse — Activity Monitor for macOS" />
@@ -19,6 +20,8 @@
       if (!t) t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
       document.documentElement.dataset.theme = t;
       document.documentElement.classList.add("js");
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.content = t === "light" ? "#fafafa" : "#0a0a0a";
     })();
   </script>
 </head>
@@ -28,12 +31,15 @@
   <div class="nav-wrap">
     <nav class="nav" aria-label="Main">
       <a href="index.html" class="brand">Kiran Bandi</a>
-      <a href="index.html#work" class="link">← Portfolio</a>
-      <a href="#features" class="link hide-sm">Features</a>
-      <a href="#screenshots" class="link hide-sm">Screenshots</a>
-      <a href="#install" class="link">Install</a>
+      <div class="links" id="navLinks">
+        <a href="index.html#work" class="link">← Portfolio</a>
+        <a href="#features" class="link">Features</a>
+        <a href="#screenshots" class="link">Screenshots</a>
+        <a href="#install" class="link">Install</a>
+      </div>
       <button class="icon-btn" id="themeToggle" aria-label="Toggle light / dark theme"><span class="t-sun">☀️</span><span class="t-moon">🌙</span></button>
-      <a href="https://github.com/Kiranbandi02/pulse" target="_blank" rel="noreferrer" class="btn btn-primary">GitHub</a>
+      <a href="https://github.com/Kiranbandi02/pulse" target="_blank" rel="noreferrer" class="btn btn-primary nav-cta">GitHub</a>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">☰</button>
     </nav>
   </div>
 
@@ -82,7 +88,7 @@
     <!-- SCREENSHOTS -->
     <section id="screenshots">
       <div class="container">
-        <div class="sec-head reveal"><div><div class="eyebrow">Screenshots</div><h2>A closer look</h2></div></div>
+        <div class="sec-head reveal"><div><div class="eyebrow">Screenshots</div><h2>A closer look</h2></div><p class="tap-hint">Tap a screenshot to view it full size.</p></div>
         <div class="shots">
           <figure class="reveal"><a href="img/pulse-network.jpg" target="_blank"><div class="win full"><div class="win-bar"><i></i><i></i><i></i></div><img src="img/pulse-network.jpg" alt="Network page with live download and upload speed graph" loading="lazy" /></div></a><figcaption><b>Network.</b> Live speed, a 3-minute graph, peaks, and data used since you opened the app and since your Mac restarted.</figcaption></figure>
           <figure class="reveal"><a href="img/pulse-processor.jpg" target="_blank"><div class="win full"><div class="win-bar"><i></i><i></i><i></i></div><img src="img/pulse-processor.jpg" alt="Processor page with usage split, load average and per-core bars" loading="lazy" /></div></a><figcaption><b>Processor.</b> Work done by your apps versus macOS itself, load average explained, and a bar for every core.</figcaption></figure>
@@ -180,7 +186,17 @@
       document.getElementById("themeToggle").addEventListener("click", function () {
         var next = root.dataset.theme === "dark" ? "light" : "dark";
         root.dataset.theme = next; localStorage.setItem("theme", next);
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m) m.content = next === "light" ? "#fafafa" : "#0a0a0a";
       });
+
+      /* mobile menu */
+      var navWrap = document.querySelector(".nav-wrap"), menuBtn = document.getElementById("menuBtn");
+      function setMenu(open) { navWrap.classList.toggle("open", open); menuBtn.setAttribute("aria-expanded", open); menuBtn.textContent = open ? "✕" : "☰"; }
+      menuBtn.addEventListener("click", function () { setMenu(!navWrap.classList.contains("open")); });
+      document.querySelectorAll("#navLinks a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+      addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+      addEventListener("resize", function () { if (innerWidth > 700) setMenu(false); });
       var io = new IntersectionObserver(function (es) {
         es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
       }, { threshold: 0.1 });

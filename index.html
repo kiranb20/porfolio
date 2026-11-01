@@ -2,7 +2,8 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
   <title>Kiran Bandi — Full Stack Developer</title>
   <meta name="description" content="Kiran Bandi — full-stack developer in Bangalore building products with Ruby on Rails, React and machine learning." />
   <link rel="icon" href="img/favicon.png" />
@@ -16,6 +17,8 @@
       if (!t) t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
       document.documentElement.dataset.theme = t;
       document.documentElement.classList.add("js");
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.content = t === "light" ? "#fafafa" : "#0a0a0a";
     })();
   </script>
   <link rel="stylesheet" href="style.css" />
@@ -28,11 +31,15 @@
   <div class="nav-wrap">
     <nav class="nav" aria-label="Main">
       <a href="#top" class="brand">Kiran Bandi</a>
-      <a href="#work" class="link">Work</a>
-      <a href="#about" class="link">About</a>
-      <a href="#experience" class="link hide-sm">Experience</a>
+      <div class="links" id="navLinks">
+        <a href="#work" class="link">Work</a>
+        <a href="#about" class="link">About</a>
+        <a href="#experience" class="link">Experience</a>
+        <a href="#contact" class="link only-menu">Contact</a>
+      </div>
       <button class="icon-btn" id="themeToggle" aria-label="Toggle light / dark theme"><span class="t-sun">☀️</span><span class="t-moon">🌙</span></button>
-      <a href="#contact" class="btn btn-primary">Contact</a>
+      <a href="#contact" class="btn btn-primary nav-cta">Contact</a>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">☰</button>
     </nav>
   </div>
 
@@ -176,8 +183,8 @@
             <a class="email" href="mailto:bandikiranbabu315@gmail.com">bandikiranbabu315@gmail.com</a>
           </div>
           <form id="contactForm" action="https://formspree.io/f/mdkebyqo" method="POST">
-            <div class="row"><input name="name" type="text" placeholder="Your name" required aria-label="Your name" /><input name="email" type="email" placeholder="Your email" required aria-label="Your email" /></div>
-            <input name="subject" type="text" placeholder="Subject" required aria-label="Subject" />
+            <div class="row"><input name="name" type="text" placeholder="Your name" required aria-label="Your name" autocomplete="name" enterkeyhint="next" /><input name="email" type="email" placeholder="Your email" required aria-label="Your email" autocomplete="email" inputmode="email" enterkeyhint="next" /></div>
+            <input name="subject" type="text" placeholder="Subject" required aria-label="Subject" enterkeyhint="next" />
             <textarea name="message" placeholder="Your message…" required aria-label="Your message"></textarea>
             <div class="form-foot"><button type="submit" class="btn btn-primary" id="sendBtn">Send message</button><span id="formStatus" role="status"></span></div>
           </form>
@@ -203,7 +210,17 @@
       document.getElementById("themeToggle").addEventListener("click", function () {
         var next = root.dataset.theme === "dark" ? "light" : "dark";
         root.dataset.theme = next; localStorage.setItem("theme", next);
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m) m.content = next === "light" ? "#fafafa" : "#0a0a0a";
       });
+
+      /* mobile menu */
+      var navWrap = document.querySelector(".nav-wrap"), menuBtn = document.getElementById("menuBtn");
+      function setMenu(open) { navWrap.classList.toggle("open", open); menuBtn.setAttribute("aria-expanded", open); menuBtn.textContent = open ? "✕" : "☰"; }
+      menuBtn.addEventListener("click", function () { setMenu(!navWrap.classList.contains("open")); });
+      document.querySelectorAll("#navLinks a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+      addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+      addEventListener("resize", function () { if (innerWidth > 700) setMenu(false); });
 
       /* reveal on scroll */
       var io = new IntersectionObserver(function (es) {
